@@ -1,0 +1,441 @@
+/* --- Reset & Variabel Global --- */
+:root {
+    --bg-color: #121212;
+    --primary-color: #1E1E1E;
+    --text-color: #E0E0E0;
+    --accent-color: #00BFFF; /* DeepSkyBlue */
+    --card-bg-color: #2A2A2A;
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: #ffffff;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.content-section {
+    padding: 6rem 0;
+    background-color: var(--primary-color);
+}
+
+.content-section:nth-of-type(odd) {
+    background-color: var(--bg-color);
+}
+
+/* --- Laman Pembuka (Hero Section) --- */
+#hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* Hapus background color dan ganti dengan gambar */
+    background-image: url('../img/laman.png'); /* Ganti dengan path gambar Anda */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Menambahkan overlay gelap agar teks lebih mudah dibaca */
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Menggabungkan overlay gelap dengan gradien ke bawah agar transisi mulus */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 85%, var(--bg-color));
+    z-index: 1;
+}
+
+.hero-content {
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    animation: fadeInDown 1s ease-out;
+}
+
+.hero-title .highlight {
+    color: var(--accent-color);
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    animation: fadeInUp 1s ease-out 0.5s;
+    animation-fill-mode: backwards;
+}
+
+/* Efek ketik */
+#typed-text::after {
+    content: '|';
+    display: inline-block;
+    animation: blink 0.7s infinite;
+    color: var(--accent-color);
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Panah Scroll Bawah */
+.scroll-down-arrow {
+    position: absolute;
+    bottom: 50px; /* Dinaikkan sedikit agar tidak tenggelam di gradien */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    animation: bounce 2s infinite;
+}
+
+.scroll-down-arrow span {
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-bottom: 2px solid var(--text-color);
+    border-right: 2px solid var(--text-color);
+    transform: rotate(45deg);
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+/* --- Header & Navigasi --- */
+#main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1rem 0;
+    transition: background-color 0.3s ease, padding 0.3s ease;
+}
+
+#main-header.scrolled {
+    background-color: rgba(30, 30, 30, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 0;
+}
+
+#main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+#main-nav ul {
+    list-style: none;
+    display: flex;
+}
+
+#main-nav ul li {
+    margin-left: 2rem;
+}
+
+#main-nav ul li a {
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+#main-nav ul li a:hover {
+    color: var(--accent-color);
+}
+
+/* --- Bagian Tentang Saya --- */
+.about-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column; /* Mengubah layout menjadi vertikal */
+    gap: 2rem;
+    max-width: 800px;
+    margin: 2rem auto 0;
+}
+
+.about-content p {
+    text-align: center; /* Membuat teks rata tengah agar serasi dengan foto di atasnya */
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    flex-shrink: 0; /* Mencegah gambar menyusut jika teks terlalu panjang */
+    border-radius: 50%; /* Membuat gambar menjadi lingkaran */
+    object-fit: cover; /* Memastikan gambar tidak terdistorsi (gepeng) */
+    border: 4px solid var(--card-bg-color);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.profile-pic:hover {
+    border-color: var(--accent-color); /* Memberi border warna aksen saat hover */
+    box-shadow: 0 8px 30px rgba(0, 191, 255, 0.3); /* Efek glow seperti item portofolio, tanpa zoom */
+}
+
+/* --- Bagian Portofolio --- */
+.section-subtitle {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 3rem auto;
+    color: #aaa;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.portfolio-item {
+    background-color: var(--card-bg-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-10px) scale(1.05); /* Menambahkan scale untuk efek zoom */
+    box-shadow: 0 12px 35px rgba(0, 191, 255, 0.3); /* Membuat bayangan lebih terang dan menyebar */
+}
+
+/* Menghilangkan style default dari link yang membungkus item portofolio */
+.portfolio-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.portfolio-info {
+    padding: 1.5rem;
+}
+
+.portfolio-info h3 {
+    margin-bottom: 0.5rem;
+}
+
+/* --- Bagian Kontak & Media Sosial --- */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.social-icon {
+    color: var(--text-color);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon svg {
+    width: 40px;
+    height: 40px;
+}
+
+.social-icon:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 2rem 0;
+    background-color: var(--bg-color);
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* --- Animasi Tambahan --- */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Menu Hamburger (Mobile) --- */
+#menu-toggle {
+    display: none; /* Sembunyikan di desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+}
+
+.hamburger {
+    width: 25px;
+    height: 2px;
+    background-color: var(--text-color);
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 2px;
+    background-color: var(--text-color);
+    left: 0;
+    transition: transform 0.3s ease, top 0.3s ease;
+}
+
+.hamburger::before {
+    top: -8px;
+}
+
+.hamburger::after {
+    top: 8px;
+}
+
+/* Animasi Hamburger menjadi 'X' saat aktif */
+#menu-toggle.active .hamburger {
+    background-color: transparent;
+}
+
+#menu-toggle.active .hamburger::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+#menu-toggle.active .hamburger::after {
+    transform: rotate(-45deg);
+    top: 0;
+}
+
+
+/* --- Desain Responsif untuk Tablet & Smartphone --- */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    /* Tampilkan tombol hamburger dan atur navigasi mobile */
+    #menu-toggle {
+        display: block;
+    }
+
+    #main-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(18, 18, 18, 0.98);
+        backdrop-filter: blur(5px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    #main-nav.active {
+        transform: translateX(0);
+    }
+
+    #main-nav ul {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #main-nav ul li {
+        margin: 1.5rem 0;
+    }
+
+    #main-nav ul li a {
+        font-size: 1.5rem;
+    }
+}
